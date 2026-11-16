@@ -1,0 +1,31 @@
+# data
+*.csv
+*.parquet
+*.jsonl
+*.avro
+*.xlsx
+# allow small fake sample files for tests
+!tests/fixtures/*.csv
+
+# secrets and local config
+.env
+.env.*
+.databrickscfg
+
+# databricks bundle state
+.databricks/
+
+# python
+__pycache__/
+*.pyc
+.venv/
+
+# dbt
+target/
+dbt_packages/
+logs/
+
+# os and editor
+.DS_Store
+.vscode/
+.idea/
