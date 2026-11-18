@@ -1,4 +1,4 @@
---initial setup of mediallion architecture
+--initial setup of medallion architecture
 
 --catalog
 create catalog if not exists indie_runners;
@@ -11,7 +11,4 @@ create schema if not exists indie_runners.gold;
 
 --volumes
 create volume if not exists indie_runners.landing.race_scraper;
---NOTE: one volume per schema, one directory per dataset, created on upload
-
-select current_catalog();
-
+--NOTE: one volume per source system, one directory per dataset, created on upload
