@@ -1,3 +1,5 @@
+from pyspark.sql import functions as F
+
 landing_path = "/Volumes/indie_runners/landing/core/events"
 checkpoint_path = "/Volumes/indie_runners/bronze/checkpoints/core_events"
 
@@ -7,6 +9,8 @@ df = (
     .option("cloudFiles.format", "parquet")
     .option("cloudFiles.schemaLocation", checkpoint_path)
     .load(landing_path)
+    .withColumn("source_file", F.col("_metadata.file_name"))
+    .withColumn("ingested_at", F.current_timestamp())
 )
 
 df.printSchema()
