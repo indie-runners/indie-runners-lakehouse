@@ -11,6 +11,8 @@ of the race scraper. Silver and gold are empty.
 
 Built on Databricks Free Edition. The repo holds code only, no data.
 
+Bronze shows two ingestion patterns: a SQL streaming table where managed state is enough, and Auto Loader in PySpark where the pipeline controls checkpoint and schema itself.
+
 ## layout
 
 Catalog: `indie_runners`
@@ -28,8 +30,8 @@ Needs a Databricks workspace with Unity Catalog and a SQL warehouse.
 
 1. Run `setup/catalog.sql`. It is safe to run again.
 2. Upload the export files to
-   `/Volumes/indie_runners/landing/race_scraper/website_targets/`.
-3. Run `ingestion/bronze_race_scraper_website_targets.sql`.
+   - `/Volumes/indie_runners/landing/*`
+3. Run `ingestion/*`.
 
 ## planned
 
