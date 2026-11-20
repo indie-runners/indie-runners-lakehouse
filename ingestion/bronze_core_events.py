@@ -3,7 +3,6 @@ from pyspark.sql import functions as F
 landing_path = "/Volumes/indie_runners/landing/core/events"
 checkpoint_path = "/Volumes/indie_runners/bronze/checkpoints/core_events"
 
-# on readStream:   .option("cloudFiles.schemaLocation", checkpoint_path)
 df = (
     spark.readStream.format("cloudFiles")
     .option("cloudFiles.format", "parquet")
@@ -13,9 +12,15 @@ df = (
     .withColumn("ingested_at", F.current_timestamp())
 )
 
-df.printSchema()
-
-# on writeStream:  .option("checkpointLocation", checkpoint_path)
-
-df.writeStream.toTable("indie_runners.bronze.core_events")
+query = (
+    df.writeStream
     .option("checkpointLocation", checkpoint_path)
+    .trigger(availableNow=True)
+    .toTable("indie_runners.bronze.core_events")
+)
+
+query.awaitTermination(120)
+print(query.isActive)
+print(query.status)
+print(query.lastProgress)
+print(spark.table("indie_runners.bronze.core_events").count())
