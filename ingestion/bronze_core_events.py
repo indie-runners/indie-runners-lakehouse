@@ -16,3 +16,6 @@ df = (
 df.printSchema()
 
 # on writeStream:  .option("checkpointLocation", checkpoint_path)
+
+df.writeStream.toTable("indie_runners.bronze.core_events")
+    .option("checkpointLocation", checkpoint_path)
