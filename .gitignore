@@ -29,3 +29,6 @@ logs/
 .DS_Store
 .vscode/
 .idea/
+
+# scratch scripts
+scratch_*.py
